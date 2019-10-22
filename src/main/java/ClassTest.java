@@ -4,9 +4,7 @@ import java.util.Scanner;
 public class ClassTest {
 
     public static void main(String[] args) {
-        // print line to system standard output device (console)
-        Scanner in = new Scanner(System.in);
-        System.out.println(verify(call(20)));
+        verify(call(20));
     }
 
     public static String call(int len){
@@ -15,11 +13,11 @@ public class ClassTest {
         String s = "";
 
         for(int i=0; i<len; i++) {
-            r3 = random.nextInt(2);
-            if (r3 == 0) {
+            r3 = random.nextInt(2);   // take Big A or small a randomly
+            if (r3 == 0) {    // take Big A
                 r1 = random.nextInt(26) + 65;
                 s += (char)r1;
-            } else if (r3 == 1) {
+            } else if (r3 == 1) {  // take small a
                 r2 = random.nextInt(26) + 97;
                 s += (char)r2;
             }
@@ -29,7 +27,7 @@ public class ClassTest {
         return s;
     }
 
-    public static String verify(String s){
+    public static void verify(String s){
         boolean flag = true;
 
         // first verification
@@ -40,20 +38,20 @@ public class ClassTest {
         }
 
         // second verification
-        if(s.equals(null)){
+        if(flag == true && s.equals(null)){
             flag = false;
         }
 
         // third verification
-        if(s.length() == 0){
+        if(flag == true && s.length() == 0){
             flag = false;
         }
 
         if(flag == true){
-            return "verified";
+            System.out.println("verified");
         }
         else{
-            return "not verified";
+            System.out.println("not verified");
         }
     }
 }
