@@ -4,7 +4,10 @@ import java.util.Scanner;
 public class ClassTest {
 
     public static void main(String[] args) {
-        verify(call(20));
+        String s1 = call(20);
+        verify(s1);
+        String s2 = call(10);
+        verify(s2);
     }
 
     public static String call(int len){
@@ -38,16 +41,16 @@ public class ClassTest {
         }
 
         // second verification
-        if(flag == true && s.equals(null)){
+        if(flag && s.equals(null)){
             flag = false;
         }
 
         // third verification
-        if(flag == true && s.length() == 0){
+        if(flag && s.length() == 0){
             flag = false;
         }
 
-        if(flag == true){
+        if(flag){
             System.out.println("verified");
         }
         else{
