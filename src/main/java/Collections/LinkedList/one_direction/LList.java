@@ -4,10 +4,6 @@ public class LList {
     private int value;
     private LList next;
 
-    public LList(int value) {
-        this.value = value;
-    }
-
     public void setValue(int value) {
         this.value = value;
     }

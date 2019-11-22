@@ -22,11 +22,12 @@ public class App {
         //System.out.println(app.containsRecursion(app.head,10));
         //app.toStringRecursion(app.head);
         //System.out.println(app.revert(app.head, ""));
-        app.toStringRecursion(app.head);
+        System.out.println(app.toString());
     }
 
     public void add(int value) {
-        LList item = new LList(value);
+        LList item = new LList();
+        item.setValue(value);
         if (head == null) {
             head = item;
             last = head;
@@ -38,6 +39,10 @@ public class App {
 
     public int get() {
         return last.getValue();
+    }
+
+    public LList getHead() {
+        return head;
     }
 
     public void remove() {
