@@ -17,22 +17,6 @@ public class DaoUser {
         this.users.add(user4);
     }
 
-    public List<User> getAll() {
-        return users;
-    }
-
-    public User get(int index) {
-        return users.get(index);
-    }
-
-    public void remove(int index) {
-        users.remove(index);
-    }
-
-    public void add(User user) {
-        users.add(user);
-    }
-
     public boolean contains(User user) {
         for (User item : users) {
             if (item.equals(user)) return true;

@@ -16,60 +16,77 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CalcServlet_JDBC extends HttpServlet {
     Connection conn;
     DaoUser daoUser;
+    User user;
 
     public CalcServlet_JDBC(DaoUser daoUser) {
-        conn = DbConnection.getConnection();
+        this.conn = DbConnection.getConnection();
         this.daoUser = daoUser;
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("doPost");
-        int user_id = Integer.parseInt(req.getParameter("user_id"));
-        String user_name = req.getParameter("user_name");
-        String user_paswd = req.getParameter("user_paswd");
-        User user = new User(user_id, user_name, user_paswd);
-
+        int userId = Integer.parseInt(req.getParameter("user_id"));
+        String userName = req.getParameter("user_name");
+        String userPassword = req.getParameter("user_paswd");
+        user = new User(userId, userName, userPassword);
         try (PrintWriter w = resp.getWriter()) {
+            System.out.println(user.getId() + " " + user.getName() + " " + user.getPassword());
             if (daoUser.contains(user)) {
-                w.println("Successful");
-
-                PrintWriter writer = resp.getWriter();
+                w.printf("Successful\n");
                 String par1 = req.getParameter("x");
                 String par2 = req.getParameter("y");
                 String op = req.getParameter("op");
                 String answer = calc(par1, par2, op);
-                writer.printf("Calculator:%s", answer);
-                writer.close();
-
+                w.printf("%s %s %s = %s\n", par1, op, par2, answer);
                 try {
                     save(par1, par2, op, answer, user.getId());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
 
-                try {
-                    show(user.getId());
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                List<String> history = show(user);
+
+                w.println("\n\n\nUser --> " + user.getName());
+                w.println("\nHistory");
+                w.println("-----------------------");
+
+                for(String item : history){
+                    w.println(item);
                 }
+
+                w.close();
+
 
             } else {
                 w.println("Not Successful");
+                w.close();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doGet");
         Path path = Paths.get("./content/html/login.html");
         ServletOutputStream os = resp.getOutputStream();
         Files.copy(path, os);
+
+        String par1 = req.getParameter("x");
+        String par2 = req.getParameter("y");
+        String op = req.getParameter("op");
+        System.out.printf("x=%s, y=%s, op=%s\n", par1, par2, op);
+        String answer = calc(par1, par2, op);
+        System.out.printf("answer=%s\n", answer);
     }
 
     private String calc(String p1, String p2, String op) {
@@ -105,24 +122,24 @@ public class CalcServlet_JDBC extends HttpServlet {
         stmt_insert.execute();
     }
 
-    public void show(int user_id) throws SQLException {
-        System.out.println("Show");
+    public List<String> show(User user) throws SQLException, IOException {
+        List<String> history = new ArrayList<>();
         final String SQLS = "SELECT * FROM calculator";
         PreparedStatement stmt = conn.prepareStatement(SQLS);
         ResultSet rset = stmt.executeQuery();
         // processing data
         while (rset.next()) {
-            if (user_id == rset.getInt("userid")) {
-                String line = String.format("id: %d, par1:%s, par2:%s, op:%s, answer:%s, userId:%d",
-                        rset.getInt("id"),
+            if (user.getId() == rset.getInt("userid")) {
+                String line = String.format("par1: %s, op: %s, par2: %s, answer: %s, userId: %d",
                         rset.getString("par1"),
-                        rset.getString("par2"),
                         rset.getString("op"),
+                        rset.getString("par2"),
                         rset.getString("answer"),
                         rset.getInt("userid"));
-                System.out.println("-----------");
                 System.out.println(line);
+                history.add(line);
             }
         }
+        return history;
     }
 }

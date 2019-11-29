@@ -10,6 +10,7 @@ public class WebApp {
         ServletContextHandler handler = new ServletContextHandler();
         DaoUser daoUser = new DaoUser();
         handler.addServlet(new ServletHolder(new CalcServlet_JDBC(daoUser)), "/hiden/jdbc/*");
+        handler.addServlet(new ServletHolder(new HistoryServlet()), "/history/*");
         server.setHandler(handler);
         server.start();
         server.join();

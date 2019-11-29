@@ -3,7 +3,7 @@ package collections;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class ClassArrayList {
+public class ClassCollections {
     public static void main(String[] args) {
         ArrayList<Integer> al = new ArrayList<>();
         LinkedList<Integer> ll = new LinkedList<>();

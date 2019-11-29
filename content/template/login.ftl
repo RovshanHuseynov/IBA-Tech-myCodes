@@ -8,16 +8,15 @@
     <title>Document</title>
 </head>
 <body>
-<a href="/login.hmtl">Login</a>
-<a href="/logout.html">Logout</a>
-<a href="/calc.html">Calc</a>
-<a href="/hostory.html">hostory</a>
-
-
+<h1>LogIn Page</h1><br/>
 <form method="post">
     <input type="text" name="user_id">
-    <br>
-    <input type="submit" value="Submit">
+    <br/>
+    <input type="text" name="user_name">
+    <br/>
+    <input type="text" name="user_password">
+    <br/>
+    <input type="submit" value="log In">
 </form>
 </body>
 </html>
