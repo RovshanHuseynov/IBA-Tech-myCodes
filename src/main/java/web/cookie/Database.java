@@ -42,7 +42,7 @@ public class Database {
         stmt_insert.execute();
     }
 
-    public List<User> select_from_users() throws SQLException {
+    public List<User> select_all_from_users() throws SQLException {
         String SQLS = "select * from users";
         PreparedStatement stmt = conn.prepareStatement(SQLS);
         ResultSet outcome = stmt.executeQuery();
@@ -57,7 +57,7 @@ public class Database {
         return users;
     }
 
-    public User select_from_one_user(int id) throws SQLException {
+    public User select_one_user_from_users(int id) throws SQLException {
         String SQLS = "select * from users where id=" + id;
         PreparedStatement stmt = conn.prepareStatement(SQLS);
         ResultSet outcome = stmt.executeQuery();
@@ -73,7 +73,7 @@ public class Database {
         return null;
     }
 
-    public List<CalculatorEntity> select_from_calculator() throws SQLException {
+    public List<CalculatorEntity> select_all_from_calculator() throws SQLException {
         String SQLS = "select * from calculator";
         PreparedStatement stmt = conn.prepareStatement(SQLS);
         ResultSet outcome = stmt.executeQuery();
@@ -91,7 +91,7 @@ public class Database {
         return history;
     }
 
-    public List<CalculatorEntity> select_from_calculator_accordingToUserId(int id) throws SQLException {
+    public List<CalculatorEntity> select_all_accordingToUserId_from_calculator(int id) throws SQLException {
         String SQLS = "select * from calculator where userid=" + id;
         PreparedStatement stmt = conn.prepareStatement(SQLS);
         ResultSet outcome = stmt.executeQuery();

@@ -38,9 +38,9 @@ public class LogInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
         System.out.println("LogIn doPost");
-        List<User> users = null;
+        List<User> users;
         try {
-            users = db.select_from_users();
+            users = db.select_all_from_users();
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
