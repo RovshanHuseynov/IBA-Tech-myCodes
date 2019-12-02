@@ -9,5 +9,8 @@
 </head>
 <body>
 <h1>History Page</h1><br/>
+<p>Current user is: userID --> ${user.getId()}, userID --> ${user.getName()}</p>
+<br/>
+<a href="menu_Logged.ftl">Menu</a>
 </body>
 </html>

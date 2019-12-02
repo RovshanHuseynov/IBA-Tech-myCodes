@@ -11,27 +11,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-public class HistoryServlet extends HttpServlet {
+public class MenuServlet extends HttpServlet {
     private final TemplateEngine engine;
 
-    public HistoryServlet(TemplateEngine engine) {
+    public MenuServlet(TemplateEngine engine) {
         this.engine = engine;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("History doGet");
+        System.out.println("Menu doGet");
         HashMap<String, Object> data = new HashMap<>();
-        engine.render("history_Logged.ftl", data, resp);
+        engine.render("menu_Logged.ftl", data, resp);
 
-        Path path = Paths.get("./content/template/history_Logged.ftl");
+        Path path = Paths.get("./content/template/menu_Logged.ftl");
         ServletOutputStream os = resp.getOutputStream();
         Files.copy(path, os);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("History doPost");
     }
 }

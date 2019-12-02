@@ -9,5 +9,11 @@
 </head>
 <body>
 <h1>LogOut Page</h1><br/>
+<p>Current user is: userID --> ${user.getId()}, userID --> ${user.getName()}</p>
+<form method="post">
+    <input type="submit" value="log Out">
+</form>
+<br/>
+<a href="menu_Logged.ftl">Menu</a>
 </body>
 </html>

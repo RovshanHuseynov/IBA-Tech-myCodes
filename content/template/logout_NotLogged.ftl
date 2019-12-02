@@ -8,15 +8,12 @@
     <title>Document</title>
 </head>
 <body>
-<h1>LogIn Page</h1><br/>
+<h1>LogOut Page</h1><br/>
+<p>Current user is: userID --> ${user.getId()}, userID --> ${user.getName()}</p>
 <form method="post">
-    <input type="text" name="user_id">
-    <br/>
-    <input type="text" name="user_name">
-    <br/>
-    <input type="text" name="user_password">
-    <br/>
-    <input type="submit" value="log In">
+    <input type="submit" value="log Out">
 </form>
+<br/>
+<a href="menu_Logged.ftl">Menu</a>
 </body>
 </html>

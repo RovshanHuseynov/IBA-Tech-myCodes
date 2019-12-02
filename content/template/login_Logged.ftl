@@ -8,15 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Calculate Page</h1><br/>
-<form method="post">
-    <input type="text" name="x">
-    <br/>
-    <input type="text" name="y">
-    <br/>
-    <input type="text" name="op">
-    <br/>
-    <input type="submit" value="Calculate">
-</form>
+<h1>LogIn Page</h1><br/>
+<br/>
+<p>Current user is: userID --> ${user.getId()}, userID --> ${user.getName()}</p>
+<br/>
+<a href="menu_Logged.ftl">Menu</a>
 </body>
 </html>
