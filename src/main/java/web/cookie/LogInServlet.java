@@ -28,7 +28,7 @@ public class LogInServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("LogIn doGet");
         //HashMap<String, Object> data = new HashMap<>();
-        engine.render("login_Logged.ftl", resp);
+        engine.render("login_ok.ftl", resp);
 
         //w = resp.getWriter();
         //w.println("USER is already logged in");

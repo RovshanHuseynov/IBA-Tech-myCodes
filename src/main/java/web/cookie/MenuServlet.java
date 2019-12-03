@@ -22,6 +22,6 @@ public class MenuServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Menu doGet");
         //HashMap<String, Object> data = new HashMap<>();
-        engine.render("menu_Logged.ftl", resp);
+        engine.render("menu_ok.ftl", resp);
     }
 }

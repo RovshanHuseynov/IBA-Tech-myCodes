@@ -37,13 +37,13 @@ public class LogOutServlet extends HttpServlet {
                     User loggedInUser = null;
                     HashMap<String, Object> data = new HashMap<>();
                     data.put("user" , loggedInUser);
-                    engine.render("logout_Logged.ftl", data, resp);
+                    engine.render("logout_ok.ftl", data, resp);
                 }
             }
         }
          */
 
-        engine.render("logout_Logged.ftl", resp);
+        engine.render("logout_ok.ftl", resp);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class HistoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("History doGet");
         //HashMap<String, Object> data = new HashMap<>();
-        engine.render("history_Logged.ftl", resp);
+        engine.render("history_ok.ftl", resp);
     }
 
     @Override

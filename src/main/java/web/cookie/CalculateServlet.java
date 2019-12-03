@@ -22,7 +22,7 @@ public class CalculateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Calculate doGet");
         //HashMap<String, Object> data = new HashMap<>();
-        engine.render("calculate_Logged.ftl", resp);
+        engine.render("calculate_ok.ftl", resp);
     }
 
     @Override
