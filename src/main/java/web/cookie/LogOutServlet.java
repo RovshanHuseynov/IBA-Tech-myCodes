@@ -25,6 +25,7 @@ public class LogOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("LogOut doGet");
+        /*
         Cookie[] cookies = req.getCookies(); // NULL
         int id = -1; // no user
         if (cookies != null) {
@@ -40,10 +41,9 @@ public class LogOutServlet extends HttpServlet {
                 }
             }
         }
+         */
 
-        Path path = Paths.get("./content/template/logout_Logged.ftl");
-        ServletOutputStream os = resp.getOutputStream();
-        Files.copy(path, os);
+        engine.render("logout_Logged.ftl", resp);
     }
 
     @Override

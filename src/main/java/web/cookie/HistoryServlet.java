@@ -21,13 +21,8 @@ public class HistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("History doGet");
-        HashMap<String, Object> data = new HashMap<>();
-        engine.render("history_Logged.ftl", data, resp);
-
-        Path path = Paths.get("./content/template/history_Logged.ftl");
-        ServletOutputStream os = resp.getOutputStream();
-        Files.copy(path, os);
-
+        //HashMap<String, Object> data = new HashMap<>();
+        engine.render("history_Logged.ftl", resp);
     }
 
     @Override

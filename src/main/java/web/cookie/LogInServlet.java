@@ -27,18 +27,20 @@ public class LogInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("LogIn doGet");
-        Path path = Paths.get("./content/template/login_Logged.ftl");
-        ServletOutputStream os = resp.getOutputStream();
-        Files.copy(path, os);
+        //HashMap<String, Object> data = new HashMap<>();
+        engine.render("login_Logged.ftl", resp);
 
-        w = resp.getWriter();
-        w.println("USER is already logged in");
+        //w = resp.getWriter();
+        //w.println("USER is already logged in");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
         System.out.println("LogIn doPost");
+        /*
         List<User> users;
+
+
         try {
             users = db.select_all_from_users();
         } catch (SQLException e) {
@@ -60,5 +62,6 @@ public class LogInServlet extends HttpServlet {
         if (!isSuccessful) {
             System.out.println("not successful");
         }
+         */
     }
 }

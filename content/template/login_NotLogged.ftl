@@ -17,6 +17,6 @@
     <input type="submit" value="log In">
 </form>
 <br/>
-<a href="menu_Logged.ftl">Menu</a>
+<a href="/menu">Menu</a>
 </body>
 </html>

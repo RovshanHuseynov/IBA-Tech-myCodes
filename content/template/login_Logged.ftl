@@ -10,8 +10,8 @@
 <body>
 <h1>LogIn Page</h1><br/>
 <br/>
-<p>Current user is: userID --> ${user.getId()}, userID --> ${user.getName()}</p>
+<p>Current user is: userID --> userID, userName --> userName</p>
 <br/>
-<a href="menu_Logged.ftl">Menu</a>
+<a href="/menu">Menu</a>
 </body>
 </html>

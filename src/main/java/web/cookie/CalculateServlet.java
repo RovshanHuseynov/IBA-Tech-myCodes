@@ -21,12 +21,8 @@ public class CalculateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Calculate doGet");
-        HashMap<String, Object> data = new HashMap<>();
-        engine.render("calc_Logged.ftl", data, resp);
-
-        Path path = Paths.get("./content/template/calc_Logged.ftl");
-        ServletOutputStream os = resp.getOutputStream();
-        Files.copy(path, os);
+        //HashMap<String, Object> data = new HashMap<>();
+        engine.render("calculate_Logged.ftl", resp);
     }
 
     @Override

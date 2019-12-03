@@ -11,20 +11,16 @@
 <h1>Menu</h1><br/>
 <list>
     <li>
-        <#if isUserLoggedIn == true>
-            <a href="login_Logged.ftl">LogIn</a>
-        <#else>
-            <a href="login_NotLogged.ftl">LogIn</a>
-        </#if>
+        <a href="/login">LogIn</a>
     </li>
     <li>
-        <a href="logout_Logged.ftl">LogOut</a>
+        <a href="/logout">LogOut</a>
     </li>
     <li>
-        <a href="calc_Logged.ftl">Calc</a>
+        <a href="/calculate">Calculate</a>
     </li>
     <li>
-        <a href="history_Logged.ftl">History</a>
+        <a href="/history">History</a>
     </li>
 </list>
 </body>
