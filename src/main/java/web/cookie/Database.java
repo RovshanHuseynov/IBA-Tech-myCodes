@@ -14,14 +14,14 @@ public class Database {
         conn = getConnection();
     }
 
-    public void insert_into_calculator(String... args) throws SQLException {
+    public void insert_into_calculator(CalculatorEntity ce) throws SQLException {
         final String SQLI = "INSERT INTO calculator (par1, par2, op, answer, userid) values (?, ?, ?, ?, ?)";
         PreparedStatement stmt_insert = conn.prepareStatement(SQLI);
-        String par1 = args[0];
-        String par2 = args[1];
-        String op = args[2];
-        String answer = args[3];
-        String userID = args[4];
+        String par1 = ce.getPar1();
+        String par2 = ce.getPar2();
+        String op = ce.getOp();
+        String answer = ce.getAnswer();
+        String userID = ce.getUserID();
 
         stmt_insert.setString(1, par1);
         stmt_insert.setString(2, par2);
@@ -61,7 +61,6 @@ public class Database {
         String SQLS = "select * from users where id=" + id;
         PreparedStatement stmt = conn.prepareStatement(SQLS);
         ResultSet outcome = stmt.executeQuery();
-        User user = null;
         while (outcome.next()) {
             if (outcome.getInt("id") == id) {
                 int idd = outcome.getInt("id");
@@ -79,34 +78,29 @@ public class Database {
         ResultSet outcome = stmt.executeQuery();
         List<CalculatorEntity> history = new ArrayList<>();
         while (outcome.next()) {
-            int id = outcome.getInt("id");
             String par1 = outcome.getString("par1");
             String par2 = outcome.getString("par2");
             String op = outcome.getString("op");
             String answer = outcome.getString("answer");
             int userID = outcome.getInt("userid");
-            CalculatorEntity calc1 = new CalculatorEntity(id, par1, par2, op, answer, userID);
+            CalculatorEntity calc1 = new CalculatorEntity(par1, par2, op, answer, String.valueOf(userID));
             history.add(calc1);
         }
         return history;
     }
 
-    public List<CalculatorEntity> select_all_accordingToUserId_from_calculator(int id) throws SQLException {
-        String SQLS = "select * from calculator where userid=" + id;
+    public List<CalculatorEntity> select_all_accordingToUserId_from_calculator(int userID) throws SQLException {
+        String SQLS = "select * from calculator where userid=" + userID;
         PreparedStatement stmt = conn.prepareStatement(SQLS);
         ResultSet outcome = stmt.executeQuery();
         List<CalculatorEntity> history = new ArrayList<>();
         while (outcome.next()) {
-            if (outcome.getInt("id") == id) {
-                int idd = outcome.getInt("id");
-                String par1 = outcome.getString("par1");
-                String par2 = outcome.getString("par2");
-                String op = outcome.getString("op");
-                String answer = outcome.getString("answer");
-                int userID = outcome.getInt("userid");
-                CalculatorEntity calc1 = new CalculatorEntity(idd, par1, par2, op, answer, userID);
-                history.add(calc1);
-            }
+            String par1 = outcome.getString("par1");
+            String par2 = outcome.getString("par2");
+            String op = outcome.getString("op");
+            String answer = outcome.getString("answer");
+            CalculatorEntity calc1 = new CalculatorEntity(par1, par2, op, answer, String.valueOf(userID));
+            history.add(calc1);
         }
         return history;
     }

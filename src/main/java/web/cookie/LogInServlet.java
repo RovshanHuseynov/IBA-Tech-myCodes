@@ -1,21 +1,17 @@
 package web.cookie;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-public class LogInServlet extends HttpServlet {
-    private PrintWriter w;
+public class LogInServlet extends HttpServlet implements MyContants{
     private final TemplateEngine engine;
     private final Database db;
 
@@ -25,43 +21,65 @@ public class LogInServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("LogIn doGet");
-        //HashMap<String, Object> data = new HashMap<>();
-        engine.render("login_ok.ftl", resp);
+        Map<String, Object> data = new HashMap<>();
+        Cookie[] cookies = req.getCookies();
+        Database db = new Database();
+        Optional<Integer> userID = Optional.empty();
+        if(cookies != null) {
+            for (Cookie c : cookies) {
+                if (c.getName().equals(COOKIE_NAME)) {
+                    userID = Optional.of(Integer.parseInt(c.getValue()));
+                }
+            }
+        }
 
-        //w = resp.getWriter();
-        //w.println("USER is already logged in");
+        if(userID.isPresent()){
+            try {
+                User curUser = db.select_one_user_from_users(userID.get());
+                data.put("message", "Hi, " + curUser.getName() + ". You are already logged in.");
+                engine.render("login_ok.ftl", data, resp);
+            } catch (SQLException e) {
+                throw new IllegalArgumentException(e);
+            }
+        }
+        else{
+            data.put("message", "");
+            engine.render("login_error.ftl", data, resp);
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("LogIn doPost");
-        /*
         List<User> users;
-
 
         try {
             users = db.select_all_from_users();
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
-        boolean isSuccessful = false;
-        User loggedIn = null;
+
+        Optional<User> loggedIn = Optional.empty();
         for (User item : users) {
             if (Integer.toString(item.getId()).equals(req.getParameter("user_id"))) {
-                System.out.println("successful");
-                isSuccessful = true;
-                Cookie c = new Cookie("%CALC%", req.getParameter("user_id"));
+                Cookie c = new Cookie(COOKIE_NAME, req.getParameter("user_id"));
                 c.setPath("/");
                 resp.addCookie(c);
+                loggedIn = Optional.of(item);
                 break;
             }
         }
 
-        if (!isSuccessful) {
-            System.out.println("not successful");
+        Map<String, Object> data = new HashMap<>();
+        if (loggedIn.isPresent()) {
+            data.put("message", "Hi, " + loggedIn.get().getName() + ". Nice to see you!");
+            engine.render("login_ok.ftl", data, resp);
         }
-         */
+        else{
+            data.put("message", "Something went wrong. Please try again.");
+            engine.render("login_error.ftl", data, resp);
+        }
     }
 }
