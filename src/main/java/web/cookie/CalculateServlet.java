@@ -71,7 +71,8 @@ public class CalculateServlet extends HttpServlet implements MyContants {
         }
 
         Map<String, Object> data = new HashMap<>();
-        data.put("message", "Your calculation is successfully finished");
+        data.put("message", "Your calculation is successfully finished<br/>" +
+                "The calculation was " + par1 + " " + op + " " + par2 + " = " + answer);
         engine.render("calculate_ok.ftl", data, resp);
     }
 

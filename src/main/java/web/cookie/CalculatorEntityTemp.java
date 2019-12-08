@@ -32,9 +32,9 @@ public class CalculatorEntityTemp {
     @Override
     public String toString() {
         return " [ " +
-                par1 + ", " +
-                par2 + ", " +
-                op + ", " +
+                par1 + " " +
+                op + " " +
+                par2 + " = " +
                 answer + " ]";
     }
 }
