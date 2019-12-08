@@ -4,7 +4,7 @@
     <title>Log in</title>
 </head>
 <body>
-<h1>LogIn Page</h1><br/>
+<h1>Login Page</h1><br/>
 <br/>
 <h4>${message}</h4>
 <br/>

@@ -37,7 +37,7 @@ public class CalculateServlet extends HttpServlet implements MyContants {
         if (userID.isPresent()) {
             try {
                 User curUser = db.select_one_user_from_users(userID.get());
-                data.put("message", "Current user is " + curUser.getName());
+                data.put("message", curUser.getName() + "'s calculator");
                 engine.render("calculate_ok.ftl", data, resp);
             } catch (SQLException e) {
                 throw new IllegalArgumentException(e);
@@ -64,7 +64,6 @@ public class CalculateServlet extends HttpServlet implements MyContants {
             }
         }
         CalculatorEntity ce = new CalculatorEntity(par1, par2, op, answer, userID);
-        System.out.println("." + userID + ".");
         try {
             db.insert_into_calculator(ce);
         } catch (SQLException e) {

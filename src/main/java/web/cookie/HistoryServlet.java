@@ -38,15 +38,15 @@ public class HistoryServlet extends HttpServlet implements MyContants{
                 for(CalculatorEntity item : lce){
                     lcet.add(new CalculatorEntityTemp(item.getPar1(), item.getPar2(), item.getOp(), item.getAnswer()));
                 }
-                data.put("message", "Current user is " + curUser.getName());
+                data.put("message", curUser.getName() + "'s History");
                 data.put("datas", lcet);
                 engine.render("history_ok.ftl", data, resp);
             } catch (SQLException e) {
                 throw new IllegalArgumentException(e);
             }
         } else {
-            data.put("message", "You must log in before calculate operation");
-            engine.render("history_error.ftl", resp);
+            data.put("message", "You must log in before seeing history");
+            engine.render("history_error.ftl", data, resp);
         }
     }
 

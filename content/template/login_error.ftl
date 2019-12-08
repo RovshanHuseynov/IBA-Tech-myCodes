@@ -4,7 +4,7 @@
     <title>Log in</title>
 </head>
 <body>
-<h1>LogIn Page</h1><br/>
+<h1>Login Page</h1><br/>
 <br/>
 <h4>${message}</h4>
 <form type="hidden" method="post">
@@ -21,7 +21,7 @@
     <input type="text" name="user_password">
     <br/>
     <br/>
-    <input type="submit" value="log In">
+    <input type="submit" value="log in">
 </form>
 <br/>
 <a href="/menu">Menu</a>
