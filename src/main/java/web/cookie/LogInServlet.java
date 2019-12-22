@@ -25,7 +25,6 @@ public class LogInServlet extends HttpServlet implements MyContants{
         System.out.println("LogIn doGet");
         Map<String, Object> data = new HashMap<>();
         Cookie[] cookies = req.getCookies();
-        Database db = new Database();
         Optional<Integer> userID = Optional.empty();
         if(cookies != null) {
             for (Cookie c : cookies) {
